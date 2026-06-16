@@ -1,0 +1,829 @@
+@import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+/* --- CONFIGURAÇÕES GLOBAIS --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- ELEMENTOS DE INTERAÇÃO (PREVENÇÃO DE SELEÇÃO) --- */
+.btn-detalhes, .seta-carrossel, .nav-links a, .logo-texto,
+.titulo-modelos, .modelo-nome, .nome-byd, .modelo-frase,
+.byd-seal, .byd-dolphin, .byd-king, .modelo-imagem, .sobre-logo-emblema {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.byd-seal, .byd-dolphin, .byd-king, .modelo-imagem {
+    -webkit-touch-callout: none;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes mostrar {
+    0% { opacity: 0; filter: blur(10px); }
+    100% { opacity: 1; filter: blur(0); }
+}
+
+@keyframes reluzir {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* --- TELA DE ENTRADA (INTRO) --- */
+#tela-inicial {
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease, visibility 1s;
+}
+
+#tela-inicial h1 {
+    font-size: clamp(40px, 6vw, 75px);
+    font-family: 'Notable', sans-serif;
+    font-weight: 400;
+    animation: mostrar 3s ease-in-out forwards, reluzir 3s linear infinite;
+    background: linear-gradient(120deg, #8c8c8c 30%, #ffffff 50%, #8c8c8c 70%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- HEADER / MENU SUPERIOR --- */
+header {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    padding: 25px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;            
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.logo-texto {
+    font-family: 'Notable', sans-serif;
+    font-size: 35px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    font-family: "Share Tech", sans-serif;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+/* --- ESTRUTURA BASE DAS DOBRAS DE CARROS --- */
+.secao-carro {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding-bottom: 5vh;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#site-principal { background-image: url('assets/fundo-foca.png'); }
+#div-dolphin { background-image: url('assets/fundo-dolphin.png'); }
+#div-king { background-image: url('assets/bydking-fundo.png'); }
+
+.container-conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+/* Imagens dos Carros */
+.byd-seal, .byd-dolphin, .byd-king {
+    width: 85vw;       
+    height: auto;
+    z-index: 2;
+}
+.byd-seal { max-width: 1250px; }
+.byd-dolphin { max-width: 1300px; }
+.byd-king { max-width: 1200px; }
+
+/* Títulos Gigantes por Trás dos Carros */
+.container-conteudo h2 {
+    font-family: 'Notable', sans-serif;
+    font-size: 10vw;
+    margin: 0;
+    position: absolute;
+    top: -3%;
+    z-index: 1;
+    animation: reluzir 5s linear infinite;
+    background: linear-gradient(120deg, #5c5c5c 30%, #ffffff 50%, #5c5c5c 70%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#div-dolphin .container-conteudo h2 { top: 3%; }
+#div-king .container-conteudo h2 { font-size: 10vw; top: -10%; }
+
+/* Botões */
+.btn-detalhes {
+    margin-top: 15px;
+    padding: 12px 40px;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-detalhes:hover {
+    transform: scale(1.05);
+    background-color: #e6e6e6;
+}
+
+/* Painel de Informações Técnicas */
+.info-tecnicas {
+    position: absolute;
+    right: -50%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+    color: #fff;
+    font-family: "Share Tech", sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.info-tecnicas h3 {
+    font-family: 'Notable', sans-serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #a79f7b;
+}
+
+.info-tecnicas .preco {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.info-tecnicas ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-tecnicas ul li {
+    font-size: 18px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+/* Transições do Modo Detalhes */
+.container-conteudo h2, .byd-seal, .byd-dolphin, .byd-king, .btn-detalhes {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s;
+}
+
+#site-principal .container-conteudo.modo-detalhes h2 { transform: translateX(-85%) !important; }
+#div-dolphin .container-conteudo.modo-detalhes h2 { transform: translateX(-75%) !important; }
+#div-king .container-conteudo.modo-detalhes h2 { transform: translateX(-90%) !important; }
+
+.container-conteudo.modo-detalhes .byd-seal,
+.container-conteudo.modo-detalhes .byd-dolphin,
+.container-conteudo.modo-detalhes .byd-king {
+    transform: translateX(-20%) scale(0.9);
+}
+
+.container-conteudo.modo-detalhes .info-tecnicas {
+    right: 10%;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.container-conteudo.modo-detalhes .btn-detalhes {
+    background-color: #ffffff;
+    color: #000;
+}
+
+/* --- SEÇÃO DE MODELOS / CARROSSEL --- */
+#secao-modelos {
+    background: linear-gradient(180deg, #313131 0%, #000000 100%);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.titulo-modelos {
+    font-family: 'Notable', sans-serif;
+    color: #fff;
+    font-size: clamp(24px, 3.5vw, 45px);
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.carrossel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    width: 90%;
+    max-width: 1100px;
+}
+
+.carrossel-card {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    max-width: 750px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modelo-nome {
+    font-family: 'Notable', sans-serif;
+    font-size: 36px;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.modelo-frase {
+    font-family: "Share Tech", sans-serif;
+    font-size: 20px;
+    color: #a79f7b;
+    margin: 0 0 25px 0;
+    letter-spacing: 1px;
+}
+
+.modelo-wrapper-imagem {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modelo-imagem {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.5));
+}
+
+/* Setas do Carrossel */
+.seta-carrossel {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.seta-carrossel svg {
+    width: 32px;
+    height: 32px;
+    fill: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.seta-carrossel:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.08);
+}
+
+.seta-carrossel:hover svg { fill: #000000; }
+.seta-esquerda:hover svg { transform: translateX(-2px); }
+.seta-direita:hover svg { transform: translateX(2px); }
+
+/* --- SEÇÃO INTERATIVA 3D --- */
+#secao-3d {
+    background: #0d0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.container-3d {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 70vh;
+    align-items: center;
+    gap: 50px;
+}
+
+.texto-3d {
+    flex: 1;
+    color: #fff;
+    font-family: "Share Tech", sans-serif;
+}
+
+.texto-3d h2 {
+    font-family: 'Notable', sans-serif;
+    font-size: clamp(24px, 3vw, 40px);
+    margin-bottom: 20px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.texto-3d p {
+    font-size: clamp(18px, 2.2vw, 35px);
+    color: #a79f7b;
+    line-height: 1.6;
+}
+
+.wrapper-iframe-3d {
+    flex: 2;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #2e2e2e;
+}
+
+.wrapper-iframe-3d iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- SEÇÃO SOBRE NÓS --- */
+#secao-sobre {
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-sobre {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.sobre-conteudo {
+    flex: 1;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sobre-titulo {
+    font-family: 'Notable', sans-serif;
+    font-size: clamp(28px, 3.5vw, 48px);
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.sobre-texto {
+    font-family: "Share Tech", sans-serif;
+    font-size: 22px;
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+}
+
+.sobre-imagem-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobre-logo-emblema {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(230, 0, 18, 0.15));
+}
+
+/* --- SEÇÃO LOCALIZAÇÃO (CORRIGIDA) --- */
+#secao-localizacao {
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 4%; /* Aumentado o padding para dar mais respiro à seção */
+    position: relative;
+    overflow: hidden;
+}
+
+.container-localizacao {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px; /* Aumentado o espaçamento entre o texto e o mapa */
+}
+
+.localizacao-conteudo {
+    flex: 1;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 2;
+}
+
+.localizacao-titulo {
+    font-family: 'Notable', sans-serif;
+    /* Correção fundamental: Uso de clamp para responsividade fluida e remoção do nowrap */
+    font-size: clamp(28px, 3vw, 42px); 
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.localizacao-subtitulo {
+    font-family: "Share Tech", sans-serif;
+    font-size: clamp(18px, 1.8vw, 24px);
+    color: #a79f7b;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.localizacao-texto {
+    font-family: "Share Tech", sans-serif;
+    font-size: 18px;
+    color: #cccccc;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Coluna do Mapa */
+.localizacao-mapa-wrapper {
+    flex: 1.3;
+    height: 55vh; /* Ajustado ligeiramente para harmonizar com o layout */
+    min-height: 350px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.localizacao-mapa-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: invert(90%) hue-rotate(180deg) grayscale(100%) brightness(90%) contrast(110%);
+}
+
+.info-endereco {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    background: rgba(13, 13, 13, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 14px;
+    color: #ffffff;
+    font-family: "Share Tech", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    max-width: 260px;
+}
+
+.info-endereco h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #a79f7b;
+    text-transform: uppercase;
+}
+
+.info-endereco p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: #e0e0e0;
+}
+
+.info-endereco .cep-destaque {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* --- MEDIA QUERIES (RESPONSIVIDADE GERAL) --- */
+@media (max-width: 1024px) {
+    .container-localizacao {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .localizacao-conteudo {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .localizacao-mapa-wrapper {
+        width: 100%;
+        height: 45vh;
+    }
+}
+
+@media (max-width: 968px) {
+    .container-3d {
+        flex-direction: column;
+        height: auto;
+    }
+    .wrapper-iframe-3d {
+        width: 100%;
+        height: 45vh;
+    }
+    .texto-3d h2 { font-size: 32px; }
+
+    .container-sobre {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
+    }
+    .sobre-conteudo {
+        max-width: 100%;
+        align-items: center;
+    }
+    .sobre-texto { font-size: 18px; }
+    .sobre-logo-emblema { max-width: 500px; }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    .logo-texto { font-size: 28px; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 16px; }
+    .info-endereco {
+        bottom: 15px;
+        left: 15px;
+        padding: 15px;
+        max-width: 220px;
+        font-size: 13px;
+    }
+}
+
+
+/* ==========================================================================
+   NOME: SEÇÃO CONTATO ATUALIZADA (CORREÇÃO DE QUEBRA & GLASSMORPHISM)
+   ========================================================================== */
+
+   #secao-contato {
+    background-color: #000000;
+    display: block; /* Garante que o container ocupe o espaço corretamente */
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 0 4%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-contato {
+    display: block; /* Layout de fluxo contínuo para evitar bugs de flex na raiz */
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); /* Centralização vertical precisa na dobra da tela */
+}
+
+/* Coluna de Texto Esquerda */
+.contato-conteudo {
+    display: block;
+    float: left;
+    width: 45%;
+    box-sizing: border-box;
+    padding-right: 20px;
+    z-index: 2;
+}
+
+.contato-titulo {
+    font-family: 'Notable', sans-serif;
+    font-size: clamp(32px, 4vw, 55px);
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+.contato-texto {
+    font-family: "Share Tech", sans-serif;
+    font-size: clamp(18px, 2vw, 24px);
+    color: #ffffff;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Coluna do Card Direita */
+.contato-card-wrapper {
+    display: block;
+    float: right;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.contato-card {
+    /* Efeito Vidro Fumê Oco/Opaco (Alinhado com o carrossel do site) */
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 45px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+}
+
+/* Bloco Interno dos Itens de Informação */
+.card-item {
+    display: block;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.card-item:last-child {
+    margin-bottom: 0; /* Remove a margem do último item */
+}
+
+/* Títulos Maiores com Suporte para Ícones Integrados */
+.item-titulo {
+    font-family: "Share Tech", sans-serif;
+    font-size: 32px; /* Tamanho expandido */
+    color: #a79f7b;   /* Tom bronzeado/dourado das áreas institucionais do layout */
+    font-weight: bold;
+    display: block;
+    margin: 0 auto 10px auto;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+}
+
+/* Alinhamento dos Ícones SVG */
+.contato-icone {
+    width: 30px;
+    height: 30px;
+    fill: #a79f7b;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    position: relative;
+    top: -2px; /* Ajuste fino de eixo vertical em relação ao texto */
+}
+
+/* Links Clientes */
+.card-item a {
+    font-family: "Share Tech", sans-serif;
+    font-size: clamp(24px, 2.3vw, 34px);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.card-item a:hover {
+    opacity: 0.75;
+    transform: scale(1.02);
+}
+
+/* Limpeza de floats para manter estabilidade do container */
+.container-contato::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Media Queries - Responsividade para Tablets e Dispositivos Móveis */
+@media (max-width: 1024px) {
+    #secao-contato {
+        height: auto;
+        padding: 80px 4%;
+    }
+    
+    .container-contato {
+        top: 0;
+        transform: none;
+    }
+
+    .contato-conteudo {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .contato-card-wrapper {
+        width: 100%;
+        float: none;
+    }
+    
+    .contato-card {
+        max-width: 100%;
+        padding: 40px 20px;
+    }
+}
